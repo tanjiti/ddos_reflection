@@ -11,18 +11,9 @@ import subprocess
 import logging
 
 REF_PROBE_RULE = {
-    'addp': {
-        'service': 'addp',
-        'protocol': 'Advanced Digi Discovery Protocol',
-        'port_list': [
-            2362,
-        ],
-        'payload_list': [
-            '4449474900010006ffffffffffff',
-        ],
-        'ip_list': [
-
-        ],
+    'unknown': {  # 未知
+        'service': 'unknown',
+        'protocol': 'unknown',
     },
     'arms': {
         'service': 'arms',
@@ -740,6 +731,13 @@ class RefProbeBase(object):
         """
         send ref request
         """
+
+        if isinstance(ref_req, str):
+            if is_hexstr(ref_req):
+                ref_req = bytes.fromhex(ref_req)
+            else:
+                ref_req = ref_req.encode('utf-8')
+
         if not ref_req:
             return
         bytes_2send = len(ref_req)
@@ -807,9 +805,9 @@ class RefProbeBase(object):
         """
         send ref request
         """
+
         if not ref_server and self.ref_server_list:
             ref_server = self.ref_server_list[0]
-
         if not ref_port and self.ref_port_list:
             ref_port = self.ref_port_list[0]
         if not ref_req and self.ref_req_list:
@@ -882,20 +880,9 @@ class RefProbe(RefProbeBase):
         RefProbeBase.__init__(self, **kwargs)
 
         self.ref_port_list = kwargs.get('port_list')
-        self.ref_payload_list = kwargs.get('payload_list')
+        self.ref_req_list = kwargs.get('payload_list')
         self.ref_service = kwargs.get('service')
         self.ref_server_list = kwargs.get('ip_list')
-
-        self.ref_req_list = []
-        for hexstr in self.ref_payload_list:
-            if isinstance(hexstr, str):
-                if is_hexstr(hexstr):
-                    p = bytes.fromhex(hexstr)
-                else:
-                    p = hexstr.encode('utf-8')
-            else:
-                p = hexstr
-            self.ref_req_list.append(p)
 
 
 if __name__ == "__main__":
@@ -958,7 +945,14 @@ if __name__ == "__main__":
         proto_params['service'] = ref_proto
         proto_params['protocol'] = ref_proto
     o = RefProbe(**proto_params)
-    if ref_proto == 'dns' and is_dig:
+    if ref_proto == 'unknown':
+        if not (ref_ip and ref_port and ref_payload):
+            print("error: need to specify the ip,port,payload for probing")
+            sys.exit(1)
+        else:
+            result = o.probe(ref_server=ref_ip, ref_port=ref_port, ref_req=ref_payload)
+
+    elif ref_proto == 'dns' and is_dig:
         result = o.probe_with_dig(dns_server=ref_ip, domain=dns_domain)
     else:
         result = o.probe(ref_server=ref_ip, ref_port=ref_port, ref_req=ref_payload)

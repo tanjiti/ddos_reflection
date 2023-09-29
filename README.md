@@ -1,8 +1,8 @@
-# ddos_reflection DDoS反射源(放大器）探测
-
-- 放大倍数计算
+# ddos_reflection DDoS反射源(放大器）放大倍数计算
   - BAF: bandwidth amplification factor 带宽放大倍数 
   - PAF: packet amplification factor 包数放大倍数
+
+# python3
 
 # 反射探测规则模版
 
@@ -63,7 +63,7 @@
     },
 ```
 
-# 实例集：
+# 已知UDP反射的实例集：
 ## 实例1： 对dns协议的反射探测，探测84.22.46.54:53，服务存活，带宽放大倍数130.13
 
 ```
@@ -148,24 +148,9 @@ python3 ref_probe.py --proto=memcache --ip=5.39.93.111 --port=11211
 
 ```
 
-## 实例5：对mssql协议的反射探测，探测154.85.48.23:1434，服务存活，带宽放大倍数165.0
 
-```
-python3 ref_probe.py --proto=mssql  --ip=154.85.48.23 --port=1434
-{
-    "ref_server": "154.85.48.23",
-    "ref_port": 1434,
-    "ref_resp_pkts": 1,
-    "ref_resp_bytes": 165,
-    "ref_req_bytes": 1,
-    "baf": 165.0,
-    "paf": 1,
-    "ref_service": "mssql"
-}
 
-```
-
-## 实例6：对arms协议的反射探测, 探测5.226.69.3:3283，服务存活，带宽放大倍数251.5
+## 实例5：对arms协议的反射探测, 探测5.226.69.3:3283，服务存活，带宽放大倍数251.5
 
 ```
 python3 ref_probe.py --proto=arms --ip=5.226.69.3 --port=3283
@@ -182,7 +167,7 @@ python3 ref_probe.py --proto=arms --ip=5.226.69.3 --port=3283
 
 ```
 
-## 实例7：对cldap协议的反射探测, 探测216.238.77.34:389，服务存活，带宽放大倍数78.41
+## 实例6：对cldap协议的反射探测, 探测216.238.77.34:389，服务存活，带宽放大倍数78.41
 
 ```
 python3 ref_probe.py --proto=cldap --ip=216.238.77.34 --port=389
@@ -200,7 +185,7 @@ python3 ref_probe.py --proto=cldap --ip=216.238.77.34 --port=389
 
 ```
 
-## 实例8：对snmp协议的反射探测, 探测68.171.218.123:161，服务存活，带宽放大倍数42.59
+## 实例7：对snmp协议的反射探测, 探测68.171.218.123:161，服务存活，带宽放大倍数42.59
 
 ```
 python3 ref_probe.py --proto=snmp --ip=68.171.218.123 --port=161
@@ -217,7 +202,7 @@ python3 ref_probe.py --proto=snmp --ip=68.171.218.123 --port=161
 
 ```
 
-## 实例9：对coap_over_gatt协议的反射探测, 探测58.176.163.242:56666，服务存活，带宽放大倍数49.33
+## 实例8：对coap_over_gatt协议的反射探测, 探测58.176.163.242:56666，服务存活，带宽放大倍数49.33
 
 ```
 python3 ref_probe.py --proto=coap_over_gatt --ip=58.176.163.242 --port=56666
@@ -233,7 +218,7 @@ python3 ref_probe.py --proto=coap_over_gatt --ip=58.176.163.242 --port=56666
 }
 ```
 
-## 实例10： 对DVR DHCPDiscover 协议的反射探测, 探测98.190.136.25:37810，服务存活，带宽放大倍数170.0
+## 实例9： 对DVR DHCPDiscover 协议的反射探测, 探测98.190.136.25:37810，服务存活，带宽放大倍数170.0
 
 ```
 python3 ref_probe.py --proto=dhcpdiscover --ip=98.190.136.25 --port=37810
@@ -250,7 +235,7 @@ python3 ref_probe.py --proto=dhcpdiscover --ip=98.190.136.25 --port=37810
 
 ```
 
-## 实例11： 对Hikvision device discover via SADP over SSH 协议的反射探测, 探测121.188.186.254:37020，服务存活，带宽放大倍数26.11
+## 实例10： 对Hikvision device discover via SADP over SSH 协议的反射探测, 探测121.188.186.254:37020，服务存活，带宽放大倍数26.11
 
 ```
 python3 ref_probe.py --proto=sadp --ip=121.188.186.254 --port=37020
@@ -267,7 +252,7 @@ python3 ref_probe.py --proto=sadp --ip=121.188.186.254 --port=37020
 
 ```
 
-## 实例12： Jenkins (Hudson Agent) CI Server Discovery （CVE-2020-2100）协议的反射探测, 探测85.214.104.48:33848，服务存活，带宽放大倍数166.0
+## 实例11： Jenkins (Hudson Agent) CI Server Discovery （CVE-2020-2100）协议的反射探测, 探测85.214.104.48:33848，服务存活，带宽放大倍数166.0
 
 ```
 python3 ref_probe.py --proto=jenkins --ip=85.214.104.48 --port=33848         
@@ -284,7 +269,7 @@ python3 ref_probe.py --proto=jenkins --ip=85.214.104.48 --port=33848
 
 ```
 
-## 实例13：对stun协议的反射探测, 探测46.44.248.126:3478，服务存活，带宽放大倍数7.2
+## 实例12：对stun协议的反射探测, 探测46.44.248.126:3478，服务存活，带宽放大倍数7.2
 
 ```
 python3 ref_probe.py --proto=stun --ip=46.44.248.126 --port=3478
@@ -298,6 +283,13 @@ python3 ref_probe.py --proto=stun --ip=46.44.248.126 --port=3478
     "paf": 1,
     "ref_service": "stun"
 }
+
+```
+
+# 未知反射探测
+```
+python3 ref_probe.py --proto=unknown --port=7777 --payload=ff --ip=95.31.20.140
+
 
 ```
 
