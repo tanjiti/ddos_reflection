@@ -218,6 +218,21 @@ python3 ref_probe.py --proto=coap_over_gatt --ip=58.176.163.242 --port=56666
 }
 ```
 
+## 实例8：对coap协议的反射探测, 探测103.98.119.97:5683，服务存活，带宽放大倍数46.81
+```
+python3 ref_probe.py --proto=coap --ip=103.98.119.97 --port=5683
+{
+    "ref_server": "103.98.119.97",
+    "ref_port": 5683,
+    "ref_resp_pkts": 1,
+    "ref_resp_bytes": 983,
+    "ref_req_bytes": 21,
+    "baf": 46.81,
+    "paf": 1,
+    "ref_service": "coap"
+}
+```
+
 ## 实例9： 对DVR DHCPDiscover 协议的反射探测, 探测98.190.136.25:37810，服务存活，带宽放大倍数170.0
 
 ```
@@ -284,6 +299,20 @@ python3 ref_probe.py --proto=stun --ip=46.44.248.126 --port=3478
     "ref_service": "stun"
 }
 
+```
+
+## 实例13: 对wsdp(soap ws-discovery ONVIF)协议的反射探测, 探测71.8.137.246:3702，服务存活，带宽放大倍数8.44
+```
+{
+    "ref_server": "71.8.137.246",
+    "ref_port": 3702,
+    "ref_resp_pkts": 1,
+    "ref_resp_bytes": 1477,
+    "ref_req_bytes": 175,
+    "baf": 8.44,
+    "paf": 1,
+    "ref_service": "wsdp"
+}
 ```
 
 # 未知反射探测
